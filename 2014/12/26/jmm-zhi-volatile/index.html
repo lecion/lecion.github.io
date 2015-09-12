@@ -4,12 +4,16 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | Bubble&#39;s blog</title>
+    <title>JMM之Volatile | Bubble&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Bubble">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+    <meta name="description" content="很长一段时间认为，volatile修饰的变量具有原子性。今天看JMM时发现错得很惨- -
+public class Main {
+    long count = 0;
+    public static void main(String[] args) {
+        new Main().s">
     
     
     
@@ -65,15 +69,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/13/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2014/12/26/jmm-zhi-volatile/" title="JMM之Volatile" itemprop="url">JMM之Volatile</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Bubble">Bubble</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-09-12T19:17:39.000Z" itemprop="datePublished">2015-09-13</time>
-    更新日期:<time datetime="2015-09-12T19:17:39.000Z" itemprop="dateModified">2015-09-13</time>
+    <time datetime="2014-12-26T09:43:27.000Z" itemprop="datePublished">2014-12-26</time>
+    更新日期:<time datetime="2015-09-12T20:15:43.000Z" itemprop="dateModified">2015-09-13</time>
     
   </p>
 </header>
@@ -82,28 +86,61 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+		
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<p>很长一段时间认为，<code>volatile</code>修饰的变量具有原子性。今天看JMM时发现错得很惨- -</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">class</span> <span class="title">Main</span> {
+    <span class="keyword">long</span> count = <span class="number">0</span>;
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span>(<span class="params">String[] args</span>) </span>{
+        <span class="keyword">new</span> Main().start();
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">start</span>(<span class="params"></span>) </span>{
+        <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &amp;lt; <span class="number">1000</span>; i++) {
+            <span class="keyword">new</span> Thread(<span class="keyword">new</span> Runnable() {
+                @<span class="function">Override
+                <span class="keyword">public</span> <span class="keyword">void</span> <span class="title">run</span>(<span class="params"></span>) </span>{
+                    inc();
+                }
+            }).start();
+        }
+        <span class="keyword">try</span> {
+            Thread.sleep(<span class="number">2000</span>);
+            System.<span class="keyword">out</span>.println(count);
+        } <span class="keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">inc</span>(<span class="params"></span>) </span>{
+        <span class="keyword">this</span>.count++;
+    }
+}
+`&lt;/pre&gt;
+
+为保证看到最后结果，加了个sleep，保证所有线程跑完。。 然后呢，结果是随机的，可能是<span class="number">995</span>，也可能是<span class="number">998</span>，还可能是..... 这说明<span class="keyword">volatile</span>是不能让修饰的变量具有原子性的。它只能让一个变量的`读`or`写`让所有线程可见。 作用等效于
+
+&lt;pre&gt;`<span class="function"><span class="keyword">public</span> synchronized <span class="keyword">void</span> <span class="title">read</span>(<span class="params"></span>) </span>{
+    <span class="keyword">return</span> <span class="keyword">this</span>.count;
+}
+</code></pre><p>而不能用于复合操作<code>count++</code>。</p>
+<p>值得注意的是，count 是 long 型。占64位，总线调度传输的数据一次是32位，所以对java中long和double这样的64位数据，是分成两个32位进行处理的，也就是对count的传送，也不是一个原子操作。但是加了volatile之后，便可以保证对于64位类型的变量也是原子操作了。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/未分类/">未分类</a>
+</div>
+
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2015/09/13/hello-world/" data-title="Hello World | Bubble&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2014/12/26/jmm-zhi-volatile/" data-title="JMM之Volatile | Bubble&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -113,18 +150,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/09/13/test/" title="test">
+ <a href="/2015/03/24/838649bffa4b924f327df210db4dc9c1/" title="24">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  test</span>
+  24</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/09/10/mac-os-x-10-10-5-sheng-ji-svn/"  title="Mac OS X 10.10.5升级SVN">
+<a href="/2014/11/06/android-zi-ding-yi-kong-jian-bu-fen-fan-yi/"  title="Android 自定义控件（翻译）">
  <strong>NEXT:</strong><br/> 
- <span>Mac OS X 10.10.5升级SVN
+ <span>Android 自定义控件（翻译）
 </span>
 </a>
 </div>
@@ -137,7 +174,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+  
   </div>
 
 <div id="asidepart">

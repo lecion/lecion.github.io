@@ -4,12 +4,18 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Hello World | Bubble&#39;s blog</title>
+    <title>Linode折腾小记 | Bubble&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Bubble">
     
-    <meta name="description" content="Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in ">
+    <meta name="description" content="四个人建个讨论组，风风火火淘宝下单，Linode到手，紧接着装系统，配置，乱七八糟搞一大堆，至今vpn还没有搞定，貌似是防火墙问题，日后再说。
+PING 106.186.127.226 (106.186.127.226): 56 data bytes
+64 bytes from 106.186.127.226: icmp_seq=0 ttl=52 time=82.186 ms
+64 bytes from 106.186.127.226: icmp_seq=1 ttl=52 time=81.069 ms
+64 bytes from 106.186.127.226: icmp_seq=2 ttl=52 time=81.507 ms
+主机在日本，这速度还是很棒，重要是稳定~
+好，以下内容主要给另外3个合租小伙伴看看 ^_^">
     
     
     
@@ -65,15 +71,15 @@
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/2015/09/13/hello-world/" title="Hello World" itemprop="url">Hello World</a>
+      <a href="/2014/10/27/linode-zhe-teng-xiao-ji/" title="Linode折腾小记" itemprop="url">Linode折腾小记</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://yoursite.com" title="Bubble">Bubble</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-09-12T19:17:39.000Z" itemprop="datePublished">2015-09-13</time>
-    更新日期:<time datetime="2015-09-12T19:17:39.000Z" itemprop="dateModified">2015-09-13</time>
+    <time datetime="2014-10-27T11:33:02.000Z" itemprop="datePublished">2014-10-27</time>
+    更新日期:<time datetime="2015-09-12T20:15:43.000Z" itemprop="dateModified">2015-09-13</time>
     
   </p>
 </header>
@@ -82,28 +88,54 @@
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
-		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#相关配置"><span class="toc-number">1.</span> <span class="toc-text">相关配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#域名绑定"><span class="toc-number">2.</span> <span class="toc-text">域名绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx"><span class="toc-number">2.1.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache"><span class="toc-number">2.2.</span> <span class="toc-text">Apache</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FTP"><span class="toc-number">3.</span> <span class="toc-text">FTP</span></a></li></ol>
 		</div>
 		
-		<p>Welcome to <a href="http://hexo.io/" target="_blank" rel="external">Hexo</a>! This is your very first post. Check <a href="http://hexo.io/docs/" target="_blank" rel="external">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="http://hexo.io/docs/troubleshooting.html" target="_blank" rel="external">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="external">GitHub</a>.</p>
-<h2 id="Quick_Start">Quick Start</h2><h3 id="Create_a_new_post">Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/writing.html" target="_blank" rel="external">Writing</a></p>
-<h3 id="Run_server">Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/server.html" target="_blank" rel="external">Server</a></p>
-<h3 id="Generate_static_files">Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/generating.html" target="_blank" rel="external">Generating</a></p>
-<h3 id="Deploy_to_remote_sites">Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure>
-<p>More info: <a href="http://hexo.io/docs/deployment.html" target="_blank" rel="external">Deployment</a></p>
+		<p>四个人建个讨论组，风风火火淘宝下单，Linode到手，紧接着装系统，配置，乱七八糟搞一大堆，至今vpn还没有搞定，貌似是防火墙问题，日后再说。</p>
+<pre><code>PING <span class="number">106.186</span><span class="number">.127</span><span class="number">.226</span> (<span class="number">106.186</span><span class="number">.127</span><span class="number">.226</span>): <span class="number">56</span> data bytes
+<span class="number">64</span> bytes from <span class="number">106.186</span><span class="number">.127</span><span class="number">.226</span>: icmp_seq=<span class="number">0</span> ttl=<span class="number">52</span> time=<span class="number">82.186</span> ms
+<span class="number">64</span> bytes from <span class="number">106.186</span><span class="number">.127</span><span class="number">.226</span>: icmp_seq=<span class="number">1</span> ttl=<span class="number">52</span> time=<span class="number">81.069</span> ms
+<span class="number">64</span> bytes from <span class="number">106.186</span><span class="number">.127</span><span class="number">.226</span>: icmp_seq=<span class="number">2</span> ttl=<span class="number">52</span> time=<span class="number">81.507</span> ms
+</code></pre><p>主机在日本，这速度还是很棒，重要是稳定~</p>
+<p>好，以下内容主要给另外3个合租小伙伴看看 ^_^<br><a id="more"></a><br>现在环境是 <code>CentOS Linux release 7.0.1406 (Core)</code> <code>nginx version: nginx/1.6.2</code> <code>Apache/2.4.6</code> <code>PHP 5.4.16</code> <code>mysql 5.5.37-MariaDB</code></p>
+<p>恩，赶赶时髦，装上了CentOS 7 和 MariaDB。</p>
+<h1 id="相关配置">相关配置</h1><p>所有请求，nginx转发到apache处理。</p>
+<ul>
+<li>nginx配置文件： <code>/etc/nginx/nginx.conf</code> <code>/etc/nginx/conf.d/default.conf</code></li>
+<li>apache配置文件： <code>/etc/httpd/conf/httpd.conf</code> <code>/etc/httpd/conf.d/***.conf</code></li>
+<li>php配置文件： <code>/etc/php.ini</code></li>
+</ul>
+<p>默认的网站根目录在 <code>/var/www/html/</code>，一般不动就可以了。一般情况下，网站目录创建在用户目录下的<code>public_html/</code>中，并使该目录权限至少有<code>711</code>(chmod -R 711)。</p>
+<h1 id="域名绑定">域名绑定</h1><h2 id="Nginx">Nginx</h2><ul>
+<li>编辑文件<code>/etc/nginx/conf.d/default.conf</code>，在<code>server_name</code>后面依次添加想绑定的域名</li>
+<li>简单起见，<code>*.domain.*</code>比较方便。例如修改为：<code>server_name *.virgilzone.com *.yliec.com;</code></li>
+<li>保存后，可用<code>nginx -t</code>检查文件配置文件语法是否正确</li>
+<li>重启nginx服务: <code>systemctl restart nginx</code></li>
+</ul>
+<h2 id="Apache">Apache</h2><ul>
+<li>编辑文件<code>/etc/httpd/conf.d/vhost.conf</code>，在里面添加虚拟主机</li>
+<li>格式按照里面其他的配置，更改<code>ServerRoot</code>为域名指向目录，<code>ServerName</code>为所绑定域名，<code>ErrorLog</code>、<code>CustomLog</code>做相应修改</li>
+<li>不要忘记在自己的用户目录下，创建<code>public_html</code> 和 <code>ServerRoot</code> 以及log文件所对应的目录。</li>
+<li>保存后重启apache服务： <code>systemctl restart httpd</code></li>
+</ul>
+<p>嗯，然后就可以嗨了。</p>
+<h1 id="FTP">FTP</h1><p>自己的ssh用户名密码即可登录ftp，做了权限设置，只能上传到自己有权限的地方（这是废话-_-）</p>
+<p>好，就这么多了，服务器慢慢配。。总算也有个归属安家了，也有个域名正身了。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
 
 
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/服务器/">服务器</a>
+</div>
+
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://yoursite.com/2015/09/13/hello-world/" data-title="Hello World | Bubble&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://yoursite.com/2014/10/27/linode-zhe-teng-xiao-ji/" data-title="Linode折腾小记 | Bubble&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -113,18 +145,18 @@
 <nav class="article-nav clearfix">
  
  <div class="prev" >
- <a href="/2015/09/13/test/" title="test">
+ <a href="/2014/10/28/android-listview-dian-ji-item-bu-xiang-ying/" title="Android ListView 点击item不响应">
   <strong>PREVIOUS:</strong><br/>
   <span>
-  test</span>
+  Android ListView 点击item不响应</span>
 </a>
 </div>
 
 
 <div class="next">
-<a href="/2015/09/10/mac-os-x-10-10-5-sheng-ji-svn/"  title="Mac OS X 10.10.5升级SVN">
+<a href="/2014/10/23/hello-world-1/"  title="我在Wordpress">
  <strong>NEXT:</strong><br/> 
- <span>Mac OS X 10.10.5升级SVN
+ <span>我在Wordpress
 </span>
 </a>
 </div>
@@ -137,7 +169,7 @@
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
-  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Quick_Start"><span class="toc-number">1.</span> <span class="toc-text">Quick Start</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Create_a_new_post"><span class="toc-number">1.1.</span> <span class="toc-text">Create a new post</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Run_server"><span class="toc-number">1.2.</span> <span class="toc-text">Run server</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Generate_static_files"><span class="toc-number">1.3.</span> <span class="toc-text">Generate static files</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Deploy_to_remote_sites"><span class="toc-number">1.4.</span> <span class="toc-text">Deploy to remote sites</span></a></li></ol></li></ol>
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#相关配置"><span class="toc-number">1.</span> <span class="toc-text">相关配置</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#域名绑定"><span class="toc-number">2.</span> <span class="toc-text">域名绑定</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#Nginx"><span class="toc-number">2.1.</span> <span class="toc-text">Nginx</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Apache"><span class="toc-number">2.2.</span> <span class="toc-text">Apache</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#FTP"><span class="toc-number">3.</span> <span class="toc-text">FTP</span></a></li></ol>
   </div>
 
 <div id="asidepart">
