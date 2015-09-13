@@ -1,0 +1,442 @@
+
+ <!DOCTYPE HTML>
+<html >
+<head>
+  <meta charset="UTF-8">
+  
+    <title>Java动态代理 | Yliec&#39;s blog</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
+    
+    <meta name="author" content="Bubble">
+    
+    <meta name="description" content="实现
+新建委托类
+实现InvocationHandler接口，负责连接代理类和委托类的中间类必须实现的接口
+通过Proxy类新建代理类对象
+
+Example
+一个数据库对象DB，拥有增删改查操作，需在增删改查之前进行权限判断。
+
+
+新建委托类DB
+定义AuthInvocationHandler实现I">
+    
+    
+    
+    
+    
+    <link rel="icon" href="/img/favicon.ico">
+    
+    
+    <link rel="apple-touch-icon" href="/img/pacman.jpg">
+    <link rel="apple-touch-icon-precomposed" href="/img/pacman.jpg">
+    
+    <link rel="stylesheet" href="/css/style.css" type="text/css">
+</head>
+
+  <body>
+    <header>
+      <div>
+		
+			<div id="imglogo">
+				<a href="/"><img src="/img/logo.svg" alt="Yliec&#39;s blog" title="Yliec&#39;s blog"/></a>
+			</div>
+			
+			<div id="textlogo">
+				<h1 class="site-name"><a href="/" title="Yliec&#39;s blog">Yliec&#39;s blog</a></h1>
+				<h2 class="blog-motto"></h2>
+			</div>
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			</a></div>
+			<nav class="animated">
+				<ul>
+					
+						<li><a href="/">Home</a></li>
+					
+						<li><a href="/archives">Archives</a></li>
+					
+						<li><a href="/about">About</a></li>
+					
+					<li>
+					
+					<form class="search" action="//google.com/search" method="get" accept-charset="utf-8">
+						<label>Search</label>
+						<input type="text" id="search" name="q" autocomplete="off" maxlength="20" placeholder="搜索" />
+						<input type="hidden" name="q" value="site:blog.yliec.com">
+					</form>
+					
+					</li>
+				</ul>
+			</nav>			
+</div>
+
+    </header>
+    <div id="container">
+      <div id="main" class="post" itemscope itemprop="blogPost">
+	<article itemprop="articleBody"> 
+		<header class="article-info clearfix">
+  <h1 itemprop="name">
+    
+      <a href="/java-dong-tai-dai-li/" title="Java动态代理" itemprop="url">Java动态代理</a>
+  </h1>
+  <p class="article-author">By
+    
+      <a href="http://blog.yliec.com" title="Bubble">Bubble</a>
+    </p>
+  <p class="article-time">
+    <time datetime="2015-06-03T04:45:25.000Z" itemprop="datePublished">2015-06-03</time>
+    更新日期:<time datetime="2015-09-13T07:01:33.000Z" itemprop="dateModified">2015-09-13</time>
+    
+  </p>
+</header>
+	<div class="article-content">
+		
+		
+		<div id="toc" class="toc-article">
+			<strong class="toc-title">文章目錄</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-number">1.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">2.</span> <span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输出结果："><span class="toc-number">2.1.</span> <span class="toc-text">输出结果：</span></a></li></ol></li></ol>
+		</div>
+		
+		<h2 id="实现">实现</h2><ul>
+<li>新建委托类</li>
+<li>实现InvocationHandler接口，负责连接代理类和委托类的中间类必须实现的接口</li>
+<li>通过Proxy类新建代理类对象</li>
+</ul>
+<h2 id="Example">Example</h2><blockquote>
+<p>一个数据库对象DB，拥有增删改查操作，需在增删改查之前进行权限判断。</p>
+</blockquote>
+<ul>
+<li>新建委托类DB</li>
+<li>定义AuthInvocationHandler实现InvocationHandler接口</li>
+<li>Proxy.newProxyInstance()生成proxy并调用增删改查</li>
+</ul>
+<p>IDB.java</p>
+<pre><code><span class="keyword">public</span> <span class="keyword">interface</span> <span class="title">IDB</span> {
+    <span class="function"><span class="keyword">void</span> <span class="title">insert</span>(<span class="params"></span>)</span>;
+    <span class="function"><span class="keyword">void</span> <span class="title">delete</span>(<span class="params"></span>)</span>;
+    <span class="function"><span class="keyword">void</span> <span class="title">update</span>(<span class="params"></span>)</span>;
+    <span class="function"><span class="keyword">void</span> <span class="title">select</span>(<span class="params"></span>)</span>;
+}
+</code></pre><p>DB.java</p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">DB</span> <span class="keyword">implements</span> <span class="title">IDB</span> </span>{
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">insert</span><span class="params">()</span> </span>{
+        System.out.println(<span class="string">"insert..."</span>);
+        sleep(<span class="number">1</span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">delete</span><span class="params">()</span> </span>{
+        System.out.println(<span class="string">"delete"</span>);
+        sleep(<span class="number">1</span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">update</span><span class="params">()</span> </span>{
+        System.out.println(<span class="string">"update"</span>);
+        sleep(<span class="number">1</span>);
+    }
+
+    <span class="annotation">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">select</span><span class="params">()</span> </span>{
+        System.out.println(<span class="string">"select"</span>);
+        sleep(<span class="number">1</span>);
+    }
+
+    <span class="function"><span class="keyword">private</span> <span class="keyword">void</span> <span class="title">sleep</span><span class="params">(<span class="keyword">int</span> seconds)</span> </span>{
+        <span class="keyword">try</span> {
+            Thread.sleep(seconds * <span class="number">1000</span>);
+        } <span class="keyword">catch</span> (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+}
+</code></pre><p>AuthInvocationHandler.java</p>
+<pre><code>public class <span class="type">AuthInvocationHandler</span> implements <span class="type">InvocationHandler</span> {
+    private <span class="type">Object</span> target;
+
+    public <span class="type">AuthInvocationHandler</span>(<span class="type">Object</span> target) {
+        this.target = target;
+    }
+
+    @<span class="type">Override</span>
+    public <span class="type">Object</span> invoke(<span class="type">Object</span> proxy, <span class="type">Method</span> <span class="keyword">method</span>, <span class="type">Object</span>[] args) throws <span class="type">Throwable</span> {
+        long start = <span class="type">System</span>.currentTimeMillis();
+        <span class="type">String</span> name = <span class="keyword">method</span>.getName();
+        boolean res = auth(name);
+
+        <span class="keyword">if</span> (!res) {
+            <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="string">"你没有"</span> + name + <span class="string">"权限"</span>);
+            <span class="keyword">return</span> <span class="literal">false</span>;
+        }
+        <span class="type">Object</span> obj = <span class="keyword">method</span>.invoke(target, args);
+        long <span class="keyword">end</span> = <span class="type">System</span>.currentTimeMillis();
+        <span class="type">System</span>.<span class="keyword">out</span>.println(<span class="keyword">method</span>.getName() + <span class="string">"耗时："</span> + (<span class="keyword">end</span> - start));
+        <span class="keyword">return</span> obj;
+    }
+
+    private boolean auth(<span class="type">String</span> name) {
+        <span class="keyword">if</span> (name.equals(<span class="string">"update"</span>)) {
+            <span class="keyword">return</span> <span class="literal">true</span>;
+        }
+        <span class="keyword">if</span> (name.equals(<span class="string">"insert"</span>)) {
+            <span class="keyword">return</span> <span class="literal">true</span>;
+        }
+        <span class="keyword">if</span> (name.equals(<span class="string">"delete"</span>)) {
+            <span class="keyword">return</span> <span class="literal">false</span>;
+        }
+
+        <span class="keyword">if</span> (name.equals(<span class="string">"select"</span>)) {
+            <span class="keyword">return</span> <span class="literal">true</span>;
+        }
+        <span class="keyword">return</span> <span class="literal">false</span>;
+    }
+}
+</code></pre><p>Main.java</p>
+<pre><code><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Main</span> </span>{
+    <span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> main(String[] args) {
+        AuthInvocationHandler invocationHandler = <span class="keyword">new</span> AuthInvocationHandler(<span class="keyword">new</span> DB());
+        IDB db = (IDB) Proxy.newProxyInstance(IDB.<span class="keyword">class</span>.getClassLoader(), <span class="keyword">new</span> Class[] {IDB.<span class="keyword">class</span>}, invocationHandler);
+        db.select();
+        db.insert();
+        db.<span class="keyword">delete</span>();
+        db.update();
+    }
+}
+</code></pre><h3 id="输出结果：">输出结果：</h3><blockquote>
+<p>select<br>  select耗时：1003<br>  insert…<br>  insert耗时：1000<br>  你没有delete权限<br>  update<br>  update耗时：1003</p>
+</blockquote>
+  
+	</div>
+		<footer class="article-footer clearfix">
+
+
+<div class="article-categories">
+  <span></span>
+  <a class="article-category-link" href="/categories/Java/">Java</a>
+</div>
+
+
+
+<div class="article-share" id="share">
+
+  <div data-url="http://blog.yliec.com/java-dong-tai-dai-li/" data-title="Java动态代理 | Yliec&#39;s blog" data-tsina="null" class="share clearfix">
+  </div>
+
+</div>
+</footer>   	       
+	</article>
+	
+<nav class="article-nav clearfix">
+ 
+ <div class="prev" >
+ <a href="/mac-os-x-10-10-5-sheng-ji-svn/" title="Mac OS X 10.10.5升级SVN">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  Mac OS X 10.10.5升级SVN</span>
+</a>
+</div>
+
+
+<div class="next">
+<a href="/zai-yuan-you-zi-duan-ji-chu-shang-xiu-gai-nei-rong-yu-cha-zhao-shu-zi-kai-tou-ji-lu/"  title="在原有字段基础上修改内容与查找数字开头记录">
+ <strong>NEXT:</strong><br/> 
+ <span>在原有字段基础上修改内容与查找数字开头记录
+</span>
+</a>
+</div>
+
+</nav>
+
+	
+<section class="comment">
+	<div class="ds-thread"></div>
+</section>
+
+</div>  
+      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+
+  <div id="toc" class="toc-aside">
+  <strong class="toc-title">文章目錄</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#实现"><span class="toc-number">1.</span> <span class="toc-text">实现</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Example"><span class="toc-number">2.</span> <span class="toc-text">Example</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#输出结果："><span class="toc-number">2.1.</span> <span class="toc-text">输出结果：</span></a></li></ol></li></ol>
+  </div>
+
+<div id="asidepart">
+<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<aside class="clearfix">
+
+  
+<div class="categorieslist">
+	<p class="asidetitle">分類</p>
+		<ul>
+		
+			<li><a href="/categories/Android/" title="Android">Android<sup>3</sup></a></li>
+		
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
+		
+			<li><a href="/categories/折腾/" title="折腾">折腾<sup>1</sup></a></li>
+		
+			<li><a href="/categories/数据库/" title="数据库">数据库<sup>1</sup></a></li>
+		
+			<li><a href="/categories/服务器/" title="服务器">服务器<sup>1</sup></a></li>
+		
+			<li><a href="/categories/生活/" title="生活">生活<sup>1</sup></a></li>
+		
+		</ul>
+</div>
+
+
+  
+
+  <div class="rsspart">
+	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
+</div>
+
+</aside>
+</div>
+    </div>
+    <footer><div id="footer" >
+	
+	
+	<div class="social-font clearfix">
+		
+		
+		
+		
+		
+	</div>
+		<p class="copyright">Powered by <a href="http://hexo.io" target="_blank" title="hexo">hexo</a> and Theme by <a href="https://github.com/A-limon/pacman" target="_blank" title="Pacman">Pacman</a> © 2015 
+		
+		<a href="http://blog.yliec.com" target="_blank" title="Bubble">Bubble</a>
+		
+		</p>
+</div>
+</footer>
+    <script src="/js/jquery-2.1.0.min.js"></script>
+<script type="text/javascript">
+$(document).ready(function(){ 
+  $('.navbar').click(function(){
+    $('header nav').toggleClass('shownav');
+  });
+  var myWidth = 0;
+  function getSize(){
+    if( typeof( window.innerWidth ) == 'number' ) {
+      myWidth = window.innerWidth;
+    } else if( document.documentElement && document.documentElement.clientWidth) {
+      myWidth = document.documentElement.clientWidth;
+    };
+  };
+  var m = $('#main'),
+      a = $('#asidepart'),
+      c = $('.closeaside'),
+      o = $('.openaside');
+  $(window).resize(function(){
+    getSize(); 
+    if (myWidth >= 1024) {
+      $('header nav').removeClass('shownav');
+    }else
+    {
+      m.removeClass('moveMain');
+      a.css('display', 'block').removeClass('fadeOut');
+      o.css('display', 'none');
+      
+      $('#toc.toc-aside').css('display', 'none');
+        
+    }
+  });
+  c.click(function(){
+    a.addClass('fadeOut').css('display', 'none');
+    o.css('display', 'block').addClass('fadeIn');
+    m.addClass('moveMain');
+  });
+  o.click(function(){
+    o.css('display', 'none').removeClass('beforeFadeIn');
+    a.css('display', 'block').removeClass('fadeOut').addClass('fadeIn');      
+    m.removeClass('moveMain');
+  });
+  $(window).scroll(function(){
+    o.css("top",Math.max(80,260-$(this).scrollTop()));
+  });
+});
+</script>
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var ai = $('.article-content>iframe'),
+      ae = $('.article-content>embed'),
+      t  = $('#toc'),
+      h  = $('article h2')
+      ah = $('article h2'),
+      ta = $('#toc.toc-aside'),
+      o  = $('.openaside'),
+      c  = $('.closeaside');
+  if(ai.length>0){
+    ai.wrap('<div class="video-container" />');
+  };
+  if(ae.length>0){
+   ae.wrap('<div class="video-container" />');
+  };
+  if(ah.length==0){
+    t.css('display','none');
+  }else{
+    c.click(function(){
+      ta.css('display', 'block').addClass('fadeIn');
+    });
+    o.click(function(){
+      ta.css('display', 'none');
+    });
+    $(window).scroll(function(){
+      ta.css("top",Math.max(140,320-$(this).scrollTop()));
+    });
+  };
+});
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){ 
+  var $this = $('.share'),
+      url = $this.attr('data-url'),
+      encodedUrl = encodeURIComponent(url),
+      title = $this.attr('data-title'),
+      tsina = $this.attr('data-tsina');
+  var html = [
+  '<a href="#" class="overlay" id="qrcode"></a>',
+  '<div class="qrcode clearfix"><span>扫描二维码分享到微信朋友圈</span><a class="qrclose" href="#share"></a><strong>Loading...Please wait</strong><img id="qrcode-pic" data-src="http://s.jiathis.com/qrcode.php?url=' + encodedUrl + '"/></div>',
+  '<a href="#textlogo" class="article-back-to-top" title="Top"></a>',
+  '<a href="https://www.facebook.com/sharer.php?u=' + encodedUrl + '" class="article-share-facebook" target="_blank" title="Facebook"></a>',
+  '<a href="#qrcode" class="article-share-qrcode" title="QRcode"></a>',
+  '<a href="https://twitter.com/intent/tweet?url=' + encodedUrl + '" class="article-share-twitter" target="_blank" title="Twitter"></a>',
+  '<a href="http://service.weibo.com/share/share.php?title='+title+'&url='+encodedUrl +'&ralateUid='+ tsina +'&searchPic=true&style=number' +'" class="article-share-weibo" target="_blank" title="Weibo"></a>',
+  '<span title="Share to"></span>'
+  ].join('');
+  $this.append(html);
+  $('.article-share-qrcode').click(function(){
+    var imgSrc = $('#qrcode-pic').attr('data-src');
+    $('#qrcode-pic').attr('src', imgSrc);
+    $('#qrcode-pic').load(function(){
+        $('.qrcode strong').text(' ');
+    });
+  });
+});     
+</script>
+
+
+<script type="text/javascript">
+  var duoshuoQuery = {short_name:"lecion"};
+  (function() {
+    var ds = document.createElement('script');
+    ds.type = 'text/javascript';ds.async = true;
+    ds.src = '//static.duoshuo.com/embed.js';
+    ds.charset = 'UTF-8';
+    (document.getElementsByTagName('head')[0] 
+    || document.getElementsByTagName('body')[0]).appendChild(ds);
+  })();
+</script> 
+
+
+
+
+
+  </body>
+</html>
