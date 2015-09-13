@@ -12,12 +12,11 @@
     <meta name="description" content="系统自带1.7.x，升级到1.8.x
 1、Homebrew安装subversion
 brew install subversion
-`&amp;lt;/pre&amp;gt;
-
 2、删除旧版SVN的相关文件
-
-&amp;lt;pre&amp;gt;`which svn
-sudo rm -rf /usr/local/bin/svn*">
+which svn
+sudo rm -rf /usr/local/bin/svn*
+sudo rm -rf /usr/bin/svn*
+3">
     
     
     
@@ -83,7 +82,7 @@ sudo rm -rf /usr/local/bin/svn*">
     </p>
   <p class="article-time">
     <time datetime="2015-09-10T07:23:31.000Z" itemprop="datePublished">2015-09-10</time>
-    更新日期:<time datetime="2015-09-12T20:15:43.000Z" itemprop="dateModified">2015-09-13</time>
+    更新日期:<time datetime="2015-09-13T07:07:56.000Z" itemprop="dateModified">2015-09-13</time>
     
   </p>
 </header>
@@ -97,24 +96,15 @@ sudo rm -rf /usr/local/bin/svn*">
 		
 		<p>系统自带1.7.x，升级到1.8.x</p>
 <p>1、Homebrew安装subversion</p>
-<pre><code>brew <span class="operator"><span class="keyword">install</span> subversion
-<span class="string">`&lt;/pre&gt;
-
-2、删除旧版SVN的相关文件
-
-&lt;pre&gt;`</span>which svn
-sudo rm -rf /usr/<span class="keyword">local</span>/<span class="keyword">bin</span>/svn*
-sudo rm -rf /usr/<span class="keyword">bin</span>/svn*
-<span class="string">`&lt;/pre&gt;
-
-3、创建软连接
-
-&lt;pre&gt;`</span>sudo <span class="keyword">ln</span> -s /usr/<span class="keyword">local</span>/opt/subversion/<span class="keyword">bin</span>/svn* /usr/<span class="keyword">bin</span>/
-<span class="string">`&lt;/pre&gt;
-
-查看版本号
-
-&lt;pre&gt;`</span>svn <span class="comment">--version</span></span>
+<pre><code><span class="keyword">brew </span>install <span class="keyword">subversion</span>
+</code></pre><p>2、删除旧版SVN的相关文件</p>
+<pre><code><span class="keyword">which</span> svn
+sudo <span class="keyword">rm</span> -rf /usr/<span class="keyword">local</span>/bin/svn*
+sudo <span class="keyword">rm</span> -rf /usr/bin/svn*
+</code></pre><p>3、创建软连接</p>
+<pre><code>sudo ln -s <span class="regexp">/usr/</span>local<span class="regexp">/opt/</span>subversion<span class="regexp">/bin/</span>svn* <span class="regexp">/usr/</span>bin<span class="regexp">/</span>
+</code></pre><p>4、查看版本号</p>
+<pre><code>svn <span class="comment">--version</span>
 </code></pre><blockquote>
 <p>svn, version 1.8.13 (r1667537)</p>
 <p>compiled Mar 31 2015, 15:33:52 on x86_64-apple-darwin14.1.0</p>
@@ -126,7 +116,7 @@ sudo rm -rf /usr/<span class="keyword">bin</span>/svn*
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/未分类/">未分类</a>
+  <a class="article-category-link" href="/categories/折腾/">折腾</a>
 </div>
 
 
@@ -179,11 +169,13 @@ sudo rm -rf /usr/<span class="keyword">bin</span>/svn*
 		
 			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
 		
+			<li><a href="/categories/折腾/" title="折腾">折腾<sup>1</sup></a></li>
+		
 			<li><a href="/categories/数据库/" title="数据库">数据库<sup>1</sup></a></li>
 		
 			<li><a href="/categories/服务器/" title="服务器">服务器<sup>1</sup></a></li>
 		
-			<li><a href="/categories/未分类/" title="未分类">未分类<sup>1</sup></a></li>
+			<li><a href="/categories/未分类/" title="未分类">未分类<sup>0</sup></a></li>
 		
 			<li><a href="/categories/生活/" title="生活">生活<sup>1</sup></a></li>
 		
