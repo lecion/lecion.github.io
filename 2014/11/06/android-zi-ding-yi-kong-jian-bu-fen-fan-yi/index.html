@@ -9,9 +9,8 @@
     
     <meta name="author" content="Bubble">
     
-    <meta name="description" content="#自定义控件
-Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。
-可用的widgets的部分列表包">
+    <meta name="description" content="自定义控件Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。
+可用的widgets的部分列表包括：">
     
     
     
@@ -77,7 +76,7 @@ Android提供了许多成熟和强大的控件来构建你的UI，基于最基�
     </p>
   <p class="article-time">
     <time datetime="2014-11-05T17:22:27.000Z" itemprop="datePublished">2014-11-06</time>
-    更新日期:<time datetime="2015-09-13T07:21:37.000Z" itemprop="dateModified">2015-09-13</time>
+    更新日期:<time datetime="2015-09-13T07:23:08.000Z" itemprop="dateModified">2015-09-13</time>
     
   </p>
 </header>
@@ -86,11 +85,10 @@ Android提供了许多成熟和强大的控件来构建你的UI，基于最基�
 		
 		<div id="toc" class="toc-article">
 			<strong class="toc-title">文章目錄</strong>
-		
+		<ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义控件"><span class="toc-number">1.</span> <span class="toc-text">自定义控件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础的方法"><span class="toc-number">1.1.</span> <span class="toc-text">基础的方法</span></a></li></ol></li></ol>
 		</div>
 		
-		<p>#自定义控件</p>
-<p>Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。</p>
+		<h1 id="自定义控件">自定义控件</h1><p>Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。</p>
 <p>可用的widgets的部分列表包括： Button, TextView, EditText, ListView, CheckBox, RadioButton, Gallery, Spinner, 以及拥有更多特性的  AutoCompleteTextView, ImageSwitcher, and TextSwitcher。</p>
 <p>可用的Layout有LinearLayout, FrameLayout, RelativeLayout等等。可以查看<a href="http://developer.android.com/guide/topics/ui/layout-objects.html" target="_blank" rel="external">Common Layout Objects</a> 以了解更多信息。</p>
 <p>如果你没有找到你需要的widgets或者layouts，你可以创建你自己的View子类。如果你只需要对现有的widgets 或者 layouts进行小的改动，你可以简单的继承现有的widgets 或者 layouts并且复写它们的一些方法。</p>
@@ -102,8 +100,7 @@ Android提供了许多成熟和强大的控件来构建你的UI，基于最基�
 <li>你可以捕获其他的事件比如press并且用你自己的方式处理他们（比如做一个游戏）。</li>
 </ul>
 <p>下面的章节将解释怎样去创建自定义视图以及如何在你的应用中使用他们。要获得更详细的说明信息，可以看<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a> class</p>
-<p>##基础的方法</p>
-<p>这里有一个你所需要怎么开始创建属于你自己的view的概括：</p>
+<h2 id="基础的方法">基础的方法</h2><p>这里有一个你所需要怎么开始创建属于你自己的view的概括：</p>
 <p>1.继承已经存在的<code>View</code>或者它的其他子类。</p>
 <p>2.从它的父类复写一些方法。这些方法以<code>on</code>开头，比如，<code>onDraw()</code>，<code>onMeasure()</code>，以及<code>onKeyDown</code>。这个和<code>Activity</code> 或者 <code>ListAcitivity</code>中的<code>on...</code>回调方法很类似，你经常复写这些关于生命周期函数以及毁掉方法。</p>
 <p>3.使用你扩展的class。一旦完成，你扩展的class能够放在view能够使用的任何地方使用。</p>
@@ -342,7 +339,7 @@ Android提供了许多成熟和强大的控件来构建你的UI，基于最基�
 
   <div id="toc" class="toc-aside">
   <strong class="toc-title">文章目錄</strong>
-  
+  <ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#自定义控件"><span class="toc-number">1.</span> <span class="toc-text">自定义控件</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#基础的方法"><span class="toc-number">1.1.</span> <span class="toc-text">基础的方法</span></a></li></ol></li></ol>
   </div>
 
 <div id="asidepart">
