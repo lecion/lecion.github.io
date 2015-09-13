@@ -9,8 +9,9 @@
     
     <meta name="author" content="Bubble">
     
-    <meta name="description" content="#自定义控件Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。
-可用的widgets的部分列表包括">
+    <meta name="description" content="#自定义控件
+Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。
+可用的widgets的部分列表包">
     
     
     
@@ -76,7 +77,7 @@
     </p>
   <p class="article-time">
     <time datetime="2014-11-05T17:22:27.000Z" itemprop="datePublished">2014-11-06</time>
-    更新日期:<time datetime="2015-09-13T07:19:18.000Z" itemprop="dateModified">2015-09-13</time>
+    更新日期:<time datetime="2015-09-13T07:21:37.000Z" itemprop="dateModified">2015-09-13</time>
     
   </p>
 </header>
@@ -88,7 +89,8 @@
 		
 		</div>
 		
-		<p>#自定义控件<br>Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。</p>
+		<p>#自定义控件</p>
+<p>Android提供了许多成熟和强大的控件来构建你的UI，基于最基础的class：View 和 VIewGroup。首先，这个平台包含了许多预构建的View和ViewGroup的子类-依次被称为Widgets和Layouts-你可以用它们来创建你的UI。</p>
 <p>可用的widgets的部分列表包括： Button, TextView, EditText, ListView, CheckBox, RadioButton, Gallery, Spinner, 以及拥有更多特性的  AutoCompleteTextView, ImageSwitcher, and TextSwitcher。</p>
 <p>可用的Layout有LinearLayout, FrameLayout, RelativeLayout等等。可以查看<a href="http://developer.android.com/guide/topics/ui/layout-objects.html" target="_blank" rel="external">Common Layout Objects</a> 以了解更多信息。</p>
 <p>如果你没有找到你需要的widgets或者layouts，你可以创建你自己的View子类。如果你只需要对现有的widgets 或者 layouts进行小的改动，你可以简单的继承现有的widgets 或者 layouts并且复写它们的一些方法。</p>
@@ -100,7 +102,8 @@
 <li>你可以捕获其他的事件比如press并且用你自己的方式处理他们（比如做一个游戏）。</li>
 </ul>
 <p>下面的章节将解释怎样去创建自定义视图以及如何在你的应用中使用他们。要获得更详细的说明信息，可以看<a href="http://developer.android.com/reference/android/view/View.html" target="_blank" rel="external">View</a> class</p>
-<p>##基础的方法<br>这里有一个你所需要怎么开始创建属于你自己的view的概括：</p>
+<p>##基础的方法</p>
+<p>这里有一个你所需要怎么开始创建属于你自己的view的概括：</p>
 <p>1.继承已经存在的<code>View</code>或者它的其他子类。</p>
 <p>2.从它的父类复写一些方法。这些方法以<code>on</code>开头，比如，<code>onDraw()</code>，<code>onMeasure()</code>，以及<code>onKeyDown</code>。这个和<code>Activity</code> 或者 <code>ListAcitivity</code>中的<code>on...</code>回调方法很类似，你经常复写这些关于生命周期函数以及毁掉方法。</p>
 <p>3.使用你扩展的class。一旦完成，你扩展的class能够放在view能够使用的任何地方使用。</p>
@@ -116,7 +119,8 @@
 <p>3.你可能想创建你自己的事件监听器，存取和修改属性的方法，以及更多的高级特性。</p>
 <p>4.基本上你会复写<code>onMeasure()</code>，如果你想让控件显示一些东西，你也可能会复写<code>onDraw()</code>。它们有其各自的默认行为，<code>onDraw</code>默认不会做任何工作，<code>onMeasure</code>将总是设置尺寸为100*100，这可能不是你所期望的。</p>
 <p>5.其他<code>on...</code>方法也将在被需要的时候复写。</p>
-<p>###继承<code>OnDraw()</code>和<code>onMeasure()</code><br><code>onDraw()</code>方法传送一个<code>Canvas</code>参数，你能使用它实现任何你希望的东西：2D graphics、其他标准或自定义的组件，各种样式的字体，或者其他你想要的东西。</p>
+<p>###继承<code>OnDraw()</code>和<code>onMeasure()</code></p>
+<p><code>onDraw()</code>方法传送一个<code>Canvas</code>参数，你能使用它实现任何你希望的东西：2D graphics、其他标准或自定义的组件，各种样式的字体，或者其他你想要的东西。</p>
 <blockquote>
 <p>Note:这个对3D graphics并不适用。如果你想使用3D graphics，你必须继承<code>SurfaceView</code>而不是<code>View</code>，并且开辟一个单独的线程进行绘制。可以查看 GLSurfaceViewActivity Sample 获得详细信息。<br><code>onMeasure()</code>稍微有点复杂。<code>onMeasure()</code>是联系你的组件和它的容器之间的临界部分。<code>onMeasure()</code>应该被复写以高效并准确的测量它包含的部分的尺寸。这显得有些复杂因为它会受限于父布局的约束（通过onMeasure()传递进来的参数)。一旦尺寸定了下来，将通过测量后的宽和高来调用<code>setMeasuredDimension()</code>进行尺寸的设定。如果你复写<code>onMeasure()</code>方法，却没能调用<code>setMeasuredDimension()</code>方法，那么在测量时期，将会产生意外的结果。</p>
 </blockquote>
@@ -211,7 +215,8 @@
 </tr>
 </tbody>
 </table>
-<p>###一个自定义视图的例子<br>自定义视图的例子在 <a href="http://developer.android.com/resources/samples/ApiDemos/index.html" target="_blank" rel="external">API Demos</a>  中可以查看。这个自定义视图定义在<a href="http://developer.android.com/samples/index.html" target="_blank" rel="external">LabelView</a>  文件中。</p>
+<p>###一个自定义视图的例子</p>
+<p>自定义视图的例子在 <a href="http://developer.android.com/resources/samples/ApiDemos/index.html" target="_blank" rel="external">API Demos</a>  中可以查看。这个自定义视图定义在<a href="http://developer.android.com/samples/index.html" target="_blank" rel="external">LabelView</a>  文件中。</p>
 <p>LabelView这个例子展现了自定义控件中的许多不同的方面。</p>
 <ul>
 <li>继承<code>View</code>以完成自定义控件</li>
@@ -221,7 +226,8 @@
 <li>一个复写的<code>onDraw()</code>方法，用来将label绘制到提供的canvas上。</li>
 </ul>
 <p>你可以从例子中的<a href="http://developer.android.com/resources/samples/ApiDemos/res/layout/custom_view_1.html" target="_blank" rel="external">custom_view_1.xml</a>看到一些示例用法。特别地，你可以看见<code>android:</code>命名空间的参数和<code>app:</code>命名空间的参数混在一起同时使用。这些<code>app:</code>参数是LabelView能够识别的自定义参数，被定义在R资源定义文件中的内部类 styleable中。（译者注：即R.styleble.<em>*</em>）</p>
-<p>##复合控件<br>如果你不想创建一个完整的自定义控件，而是希望将一些已经存在的控件进行组合复用，那么创建一个复合控件（Compound Controls or Compound Control）将更符合要求。一言蔽之，将一些原子控件或者视图按照逻辑组合在一起就能够形成一个独立的新控件。举个例子，一个下拉列表框(Combo Box)，能够通过一行EditText以及一个带有PopupList的按钮组成。如果你按这个按钮，并且从列表中选择一些东西，它将以选中项填充EditText，但是用户也可以在EditText中直接输入他们喜欢的内容。</p>
+<p>##复合控件</p>
+<p>如果你不想创建一个完整的自定义控件，而是希望将一些已经存在的控件进行组合复用，那么创建一个复合控件（Compound Controls or Compound Control）将更符合要求。一言蔽之，将一些原子控件或者视图按照逻辑组合在一起就能够形成一个独立的新控件。举个例子，一个下拉列表框(Combo Box)，能够通过一行EditText以及一个带有PopupList的按钮组成。如果你按这个按钮，并且从列表中选择一些东西，它将以选中项填充EditText，但是用户也可以在EditText中直接输入他们喜欢的内容。</p>
 <p>在Android中，这里实际上已经有两种其他的Views实现了这样的效果：<a href="http://developer.android.com/reference/android/widget/Spinner.html" target="_blank" rel="external">Spinner</a>  和 <a href="http://developer.android.com/reference/android/widget/AutoCompleteTextView.html" target="_blank" rel="external">AutoCompleteTextView</a>, 但是不管怎样，Combo Box的概念将让我们更容易理解这个复合控件的例子。</p>
 <p>创建复合控件：</p>
 <ol>
@@ -244,19 +250,25 @@
 <li><code>onDraw()</code>和<code>onMeasure</code>方法（和更多其他的<code>on...</code>方法）不需要进行复写，默认的情况下已经足够使用。</li>
 <li>最后，你可以快速创建复合控件，并且重复使用他们因为他们就像他们是一个独立的控件一样。</li>
 </ul>
-<p>###复合控件的例子<br>在SDK自带的 API Demos 项目中，这里有两个List例子-Example 4 和 Example 6，位于 <code>Views/Lists</code>中：继承自LinearLayout的<code>SpeechView</code>能够显示Speech quotes。在例子中对应的class文件是<code>List4.java</code>和<code>List6.java</code>。</p>
-<p>##修改存在的视图类型<br>在某些情况下，这里甚至有更简单的方式去创建自定义控件。如果这里有一个和你想要的控件非常类似的控件，你可以简单的继承它并且复写你想改变的一些行为。你可以通过完全自定义控件的方式去实现这些东西，但是通过继承现有的View区改变一些属性，你也可以得到许多你希望要的行为并且改变它们。</p>
+<p>###复合控件的例子</p>
+<p>在SDK自带的 API Demos 项目中，这里有两个List例子-Example 4 和 Example 6，位于 <code>Views/Lists</code>中：继承自LinearLayout的<code>SpeechView</code>能够显示Speech quotes。在例子中对应的class文件是<code>List4.java</code>和<code>List6.java</code>。</p>
+<p>##修改存在的视图类型</p>
+<p>在某些情况下，这里甚至有更简单的方式去创建自定义控件。如果这里有一个和你想要的控件非常类似的控件，你可以简单的继承它并且复写你想改变的一些行为。你可以通过完全自定义控件的方式去实现这些东西，但是通过继承现有的View区改变一些属性，你也可以得到许多你希望要的行为并且改变它们。</p>
 <p>举个例子，SDK 的samples里包含了<a href="http://developer.android.com/resources/samples/NotePad/index.html" target="_blank" rel="external">Notepad application</a>  。它展现了使用Android平台现有的EditText去创建一个有纹理的笔记本的许多可以参考的方面。这不是一个完美的例子，而且APIs为了完成这些也许会改变它之前的样子，但是它展现了自定义控件的原则。</p>
 <p>如果你还没有做过这些，导入 Notepad 示例到Eclipse（或者只是查看源码）。尤其注意查看<code>NoteEditor.java</code>中定义的<code>MyEditText</code>。</p>
 <p>一些注意的点列在这里</p>
-<p>####1.定义<br>这个class使用如下行代码被定义<br>    <code>public static class MyEditText extends EditText</code></p>
+<p>####1.定义</p>
+<p>这个class使用如下行代码被定义<br>    <code>public static class MyEditText extends EditText</code></p>
 <pre><code>*    它被定义为<span class="string">`NoteEditor`</span> Activity的一个内部类，但是它是公开的，所以它能够以<span class="string">`NoteEditor.MyEditText`</span>的形式被外部访问。
 *    它是<span class="keyword">static</span>的，意味着它不需要生成所谓的<span class="string">"合成方法"</span>，允许它从父类访问数据的方法。相应地也意味着它表现得像一个完全独立的<span class="keyword">class</span>而不依赖于NoteEditor。这是一个cleanr的方式去创建内部类，如果不需要访问外部类的状态的话。保持生成的<span class="keyword">class</span>简单，并且让其他<span class="keyword">class</span>也能轻松使用。
 *    它集成自EditText，被我们选择用来自定义控件。当我们完成时，这个新的<span class="keyword">class</span>将能够兼容普通的<span class="string">`EditText`</span>。
-</code></pre><p>####2.类初始化<br>通常，父类构造函数将被首先调用。此外，这不是一个默认的构造函数，而是一个带有参数的构造函数。EditText 伴随着从XML文件里填充的参数被创建，因此，我们的构造函数也需要获得这些参数并且传递到父类构造函数中。</p>
-<p>####3.复写方法<br>在这个例子中，只有一个方法被复写：<code>onDraw()</code>-但是当你创建自定义控件时，可以轻松的复写其他需要的方法。</p>
+</code></pre><p>####2.类初始化</p>
+<p>通常，父类构造函数将被首先调用。此外，这不是一个默认的构造函数，而是一个带有参数的构造函数。EditText 伴随着从XML文件里填充的参数被创建，因此，我们的构造函数也需要获得这些参数并且传递到父类构造函数中。</p>
+<p>####3.复写方法</p>
+<p>在这个例子中，只有一个方法被复写：<code>onDraw()</code>-但是当你创建自定义控件时，可以轻松的复写其他需要的方法。</p>
 <p>对于Notepad 这个例子，复写<code>onDraw()</code>允许我们在EditText的canvas（canvas是传递到onDraw()方法中的）中绘制蓝色的线条。<code>super.onDraw()</code>方法在该方法结束前被调用。父类方法应该被调用，但是在这种情况下，我们在绘制完我们想要包含的线条之后才调用。</p>
-<p>####4.使用自定义控件<br>我们现在拥有了自定义的控件，但是该怎么使用呢？在Notepad例子中，自定义控件被直接使用，因此，让我们看看在<code>res/layout</code>文件夹中的<code>note_editor.xml</code></p>
+<p>####4.使用自定义控件</p>
+<p>我们现在拥有了自定义的控件，但是该怎么使用呢？在Notepad例子中，自定义控件被直接使用，因此，让我们看看在<code>res/layout</code>文件夹中的<code>note_editor.xml</code></p>
 <pre><code>&lt;view
   <span class="type">class</span>=<span class="string">"com.android.notepad.NoteEditor$MyEditText"</span> 
   <span class="property">id</span>=<span class="string">"@+id/note"</span>
