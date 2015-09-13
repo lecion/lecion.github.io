@@ -4,19 +4,14 @@
 <head>
   <meta charset="UTF-8">
   
-    <title>Mac OS X 10.10.5升级SVN | Yliec&#39;s blog</title>
+    <title>Android ListView 点击item不响应 | Yliec&#39;s blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=3, minimum-scale=1">
     
     <meta name="author" content="Bubble">
     
-    <meta name="description" content="系统自带1.7.x，升级到1.8.x
-1、Homebrew安装subversion
-brew install subversion
-2、删除旧版SVN的相关文件
-which svn
-sudo rm -rf /usr/local/bin/svn*
-sudo rm -rf /usr/bin/svn*
-3">
+    <meta name="description" content="很久以前是看过这个文章的，结果今天做东西找了好久没发现= =。真是坑爹，以此记录。
+原因ListView的Item里有Button，Checkbox等控件，抢了ListView的focus，所以item点击无效。
+解决1&amp;#46;设置item的父容器属性 android:descendantFocu">
     
     
     
@@ -43,7 +38,7 @@ sudo rm -rf /usr/bin/svn*
 				<h1 class="site-name"><a href="/" title="Yliec&#39;s blog">Yliec&#39;s blog</a></h1>
 				<h2 class="blog-motto"></h2>
 			</div>
-			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜單">
+			<div class="navbar"><a class="navbutton navmobile" href="#" title="菜单">
 			</a></div>
 			<nav class="animated">
 				<ul>
@@ -74,15 +69,15 @@ sudo rm -rf /usr/bin/svn*
 		<header class="article-info clearfix">
   <h1 itemprop="name">
     
-      <a href="/mac-os-x-10-10-5-sheng-ji-svn/" title="Mac OS X 10.10.5升级SVN" itemprop="url">Mac OS X 10.10.5升级SVN</a>
+      <a href="/android_listview_dian_ji_item_bu_xiang_ying/" title="Android ListView 点击item不响应" itemprop="url">Android ListView 点击item不响应</a>
   </h1>
   <p class="article-author">By
     
       <a href="http://blog.yliec.com" title="Bubble">Bubble</a>
     </p>
   <p class="article-time">
-    <time datetime="2015-09-10T07:23:31.000Z" itemprop="datePublished">2015-09-10</time>
-    更新日期:<time datetime="2015-09-13T07:07:56.000Z" itemprop="dateModified">2015-09-13</time>
+    <time datetime="2014-10-27T17:22:27.000Z" itemprop="datePublished">2014-10-28</time>
+    更新日期:<time datetime="2015-09-12T20:15:43.000Z" itemprop="dateModified">2015-09-13</time>
     
   </p>
 </header>
@@ -90,25 +85,15 @@ sudo rm -rf /usr/bin/svn*
 		
 		
 		<div id="toc" class="toc-article">
-			<strong class="toc-title">文章目錄</strong>
-		
+			<strong class="toc-title">文章目录</strong>
+		<ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-number">1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-number">2.</span> <span class="toc-text">解决</span></a></li></ol>
 		</div>
 		
-		<p>系统自带1.7.x，升级到1.8.x</p>
-<p>1、Homebrew安装subversion</p>
-<pre><code><span class="keyword">brew </span>install <span class="keyword">subversion</span>
-</code></pre><p>2、删除旧版SVN的相关文件</p>
-<pre><code><span class="keyword">which</span> svn
-sudo <span class="keyword">rm</span> -rf /usr/<span class="keyword">local</span>/bin/svn*
-sudo <span class="keyword">rm</span> -rf /usr/bin/svn*
-</code></pre><p>3、创建软连接</p>
-<pre><code>sudo ln -s <span class="regexp">/usr/</span>local<span class="regexp">/opt/</span>subversion<span class="regexp">/bin/</span>svn* <span class="regexp">/usr/</span>bin<span class="regexp">/</span>
-</code></pre><p>4、查看版本号</p>
-<pre><code>svn <span class="comment">--version</span>
-</code></pre><blockquote>
-<p>svn, version 1.8.13 (r1667537)</p>
-<p>compiled Mar 31 2015, 15:33:52 on x86_64-apple-darwin14.1.0</p>
-</blockquote>
+		<p>很久以前是看过这个文章的，结果今天做东西找了好久没发现= =。真是坑爹，以此记录。</p>
+<h2 id="原因">原因</h2><p>ListView的Item里有Button，Checkbox等控件，抢了ListView的focus，所以item点击无效。</p>
+<h2 id="解决">解决</h2><p>1&#46;设置item的父容器属性 <code>android:descendantFocusability=&quot;blockDescendants&quot;</code></p>
+<p>2&#46;设置有focus的item的focusable为false</p>
+<p>以上两种方法任选其一。</p>
   
 	</div>
 		<footer class="article-footer clearfix">
@@ -116,14 +101,14 @@ sudo <span class="keyword">rm</span> -rf /usr/bin/svn*
 
 <div class="article-categories">
   <span></span>
-  <a class="article-category-link" href="/categories/折腾/">折腾</a>
+  <a class="article-category-link" href="/categories/Android/">Android</a>
 </div>
 
 
 
 <div class="article-share" id="share">
 
-  <div data-url="http://blog.yliec.com/mac-os-x-10-10-5-sheng-ji-svn/" data-title="Mac OS X 10.10.5升级SVN | Yliec&#39;s blog" data-tsina="null" class="share clearfix">
+  <div data-url="http://blog.yliec.com/android_listview_dian_ji_item_bu_xiang_ying/" data-title="Android ListView 点击item不响应 | Yliec&#39;s blog" data-tsina="null" class="share clearfix">
   </div>
 
 </div>
@@ -132,11 +117,19 @@ sudo <span class="keyword">rm</span> -rf /usr/bin/svn*
 	
 <nav class="article-nav clearfix">
  
+ <div class="prev" >
+ <a href="/xin_ji_neng_jie_shui_jing_tou/" title="新技能get√——接水晶头">
+  <strong>PREVIOUS:</strong><br/>
+  <span>
+  新技能get√——接水晶头</span>
+</a>
+</div>
+
 
 <div class="next">
-<a href="/java-dong-tai-dai-li/"  title="Java动态代理">
+<a href="/linode_zhe_teng_xiao_ji/"  title="Linode折腾小记">
  <strong>NEXT:</strong><br/> 
- <span>Java动态代理
+ <span>Linode折腾小记
 </span>
 </a>
 </div>
@@ -149,20 +142,20 @@ sudo <span class="keyword">rm</span> -rf /usr/bin/svn*
 </section>
 
 </div>  
-      <div class="openaside"><a class="navbutton" href="#" title="顯示側邊欄"></a></div>
+      <div class="openaside"><a class="navbutton" href="#" title="显示侧边栏"></a></div>
 
   <div id="toc" class="toc-aside">
-  <strong class="toc-title">文章目錄</strong>
-  
+  <strong class="toc-title">文章目录</strong>
+  <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#原因"><span class="toc-number">1.</span> <span class="toc-text">原因</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#解决"><span class="toc-number">2.</span> <span class="toc-text">解决</span></a></li></ol>
   </div>
 
 <div id="asidepart">
-<div class="closeaside"><a class="closebutton" href="#" title="隱藏側邊欄"></a></div>
+<div class="closeaside"><a class="closebutton" href="#" title="隐藏侧边栏"></a></div>
 <aside class="clearfix">
 
   
 <div class="categorieslist">
-	<p class="asidetitle">分類</p>
+	<p class="asidetitle">分类</p>
 		<ul>
 		
 			<li><a href="/categories/Android/" title="Android">Android<sup>3</sup></a></li>
@@ -184,7 +177,7 @@ sudo <span class="keyword">rm</span> -rf /usr/bin/svn*
   
 
   <div class="rsspart">
-	<a href="null" target="_blank" title="rss">RSS 訂閱</a>
+	<a href="null" target="_blank" title="rss">RSS 订阅</a>
 </div>
 
 </aside>
