@@ -12,9 +12,7 @@
     <meta name="description" content="情境：存在字段X，将字段X的内容替换为与原有内容相关的内容
 Example：intro = ‘2014届毕业生’ 替换成 intro = ‘2014级毕业生’
 update table set `intro` = replace(intro, &#39;届&#39;, &#39;级&#39;);
-`&amp;lt;/pre&amp;gt;
-
-如果">
+如果有批量记录，并且记录并不都是以">
     
     
     
@@ -80,7 +78,7 @@ update table set `intro` = replace(intro, &#39;届&#39;, &#39;级&#39;);
     </p>
   <p class="article-time">
     <time datetime="2015-03-27T09:21:54.000Z" itemprop="datePublished">2015-03-27</time>
-    更新日期:<time datetime="2015-09-12T20:15:43.000Z" itemprop="dateModified">2015-09-13</time>
+    更新日期:<time datetime="2015-09-13T07:06:15.000Z" itemprop="dateModified">2015-09-13</time>
     
   </p>
 </header>
@@ -94,17 +92,11 @@ update table set `intro` = replace(intro, &#39;届&#39;, &#39;级&#39;);
 		
 		<h3 id="情境：">情境：</h3><p>存在字段X，将字段X的内容替换为与原有内容相关的内容</p>
 <h3 id="Example：">Example：</h3><p><code>intro</code> = ‘2014届毕业生’ 替换成 <code>intro</code> = ‘2014级毕业生’</p>
-<pre><code><span class="keyword">update</span> table <span class="keyword">set</span> `<span class="keyword">intro</span>` = replace(<span class="keyword">intro</span>, <span class="string">'届'</span>, <span class="string">'级'</span>);
-`&lt;/<span class="keyword">pre</span>&gt;
-
-如果有批量记录，并且记录并不都是以数字开头，此时需要查找数字开头的记录。可使用<span class="keyword">ascii</span>码来判断
-
-&lt;<span class="keyword">pre</span>&gt;`where <span class="keyword">ascii</span>(`<span class="keyword">intro</span>`) &amp;gt; <span class="number">47</span> <span class="built_in">and</span> <span class="keyword">ascii</span>(`<span class="keyword">intro</span>`) &amp;<span class="keyword">lt</span>; <span class="number">58</span>;
-`&lt;/<span class="keyword">pre</span>&gt;
-
-连起来
-
-&lt;<span class="keyword">pre</span>&gt;`<span class="keyword">update</span> table <span class="keyword">set</span> `<span class="keyword">intro</span>` = replace(<span class="keyword">intro</span>, <span class="string">'届'</span>, <span class="string">'级'</span>) where <span class="keyword">ascii</span>(`<span class="keyword">intro</span>`) &amp;gt; <span class="number">47</span> <span class="built_in">and</span> <span class="keyword">ascii</span>(`<span class="keyword">intro</span>`) &amp;<span class="keyword">lt</span>; <span class="number">58</span>;
+<pre><code><span class="operator"><span class="keyword">update</span> <span class="keyword">table</span> <span class="keyword">set</span> <span class="string">`intro`</span> = <span class="keyword">replace</span>(intro, <span class="string">'届'</span>, <span class="string">'级'</span>);</span>
+</code></pre><p>如果有批量记录，并且记录并不都是以数字开头，此时需要查找数字开头的记录。可使用ascii码来判断</p>
+<pre><code>where ascii(<span class="escape">`i</span>ntro<span class="escape">`)</span> &gt; <span class="number">47</span> <span class="literal">and</span> ascii(<span class="escape">`i</span>ntro<span class="escape">`)</span> &lt; <span class="number">58</span><span class="comment">;</span>
+</code></pre><p>连起来</p>
+<pre><code><span class="operator"><span class="keyword">update</span> <span class="keyword">table</span> <span class="keyword">set</span> <span class="string">`intro`</span> = <span class="keyword">replace</span>(intro, <span class="string">'届'</span>, <span class="string">'级'</span>) <span class="keyword">where</span> <span class="keyword">ascii</span>(<span class="string">`intro`</span>) &gt; <span class="number">47</span> <span class="keyword">and</span> <span class="keyword">ascii</span>(<span class="string">`intro`</span>) &lt; <span class="number">58</span>;</span>
 </code></pre>  
 	</div>
 		<footer class="article-footer clearfix">
@@ -171,13 +163,13 @@ update table set `intro` = replace(intro, &#39;届&#39;, &#39;级&#39;);
 		
 			<li><a href="/categories/Android/" title="Android">Android<sup>3</sup></a></li>
 		
-			<li><a href="/categories/Java/" title="Java">Java<sup>1</sup></a></li>
+			<li><a href="/categories/Java/" title="Java">Java<sup>2</sup></a></li>
 		
 			<li><a href="/categories/数据库/" title="数据库">数据库<sup>1</sup></a></li>
 		
 			<li><a href="/categories/服务器/" title="服务器">服务器<sup>1</sup></a></li>
 		
-			<li><a href="/categories/未分类/" title="未分类">未分类<sup>2</sup></a></li>
+			<li><a href="/categories/未分类/" title="未分类">未分类<sup>1</sup></a></li>
 		
 			<li><a href="/categories/生活/" title="生活">生活<sup>1</sup></a></li>
 		
